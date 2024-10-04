@@ -2,8 +2,39 @@
 
 ### Background
 
-![img.png](img.png)
+A language model estimates the probability of a sequence of words in a sentence:
 
+$$ P(w_1, \ldots, w_N) = \prod_{i=1}^N P(w_i | w_1, \ldots, w_{i-1}) $$
+
+The goal is to estimate the probability of a given sentence using a **Markov Assumption** to approximate the conditional probabilities:
+
+### N-gram Approximation
+We simplify the estimation using the following assumption:
+
+$$ P(w_i | w_1, \ldots, w_{i-1}) \approx P(w_i | w_{i-n+1}, \ldots, w_{i-1}) $$
+
+- **Unigram Language Model**:  
+  $$ P(w_i) = \frac{\text{count}(w_i)}{\sum_{j \in V} \text{count}(w_j)} $$
+
+- **Bigram Language Model**:  
+  $$ P(w_i | w_{i-1}) = \frac{\text{count}(w_{i-1}, w_i)}{\text{count}(w_{i-1})} $$
+
+- **Trigram Language Model**:  
+  $$ P(w_i | w_{i-2}, w_{i-1}) = \frac{\text{count}(w_{i-2}, w_{i-1}, w_i)}{\text{count}(w_{i-2}, w_{i-1})} $$
+
+### Smoothing
+To handle unseen words or n-grams in the test data, **Laplace Smoothing** is often used:
+
+$$ P(w_i | w_{i-n+1}, \ldots, w_{i-1}) = \frac{\text{count}(w_{i-n+1}, \ldots, w_{i-1}, w_i) + 1}{\text{count}(w_{i-n+1}, \ldots, w_{i-1}) + |V|} $$
+
+where \( |V| \) is the size of the vocabulary.
+
+### Perplexity
+To evaluate the performance of our model, we calculate the **perplexity** on a test set:
+
+$$ PP(w_1, \ldots, w_N) = P(w_1, \ldots, w_N)^{-\frac{1}{N}} $$
+
+This metric measures how well the model predicts a sample, with lower perplexity indicating a better fit.
 
 ## Implementation Steps
 
@@ -36,6 +67,7 @@ The model can be implemented in Python, using libraries like `nltk` for text pre
 - **Building n-gram Counts**
 - **Probability Estimation**
 - **Model Evaluation** using perplexity.
+
 
 - Running the following will provide scores for Unigram, Bigram. 
 
