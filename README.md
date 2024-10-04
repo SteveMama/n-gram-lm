@@ -13,15 +13,6 @@ We simplify the estimation using the following assumption:
 
 $$ P(w_i | w_1, \ldots, w_{i-1}) \approx P(w_i | w_{i-n+1}, \ldots, w_{i-1}) $$
 
-- **Unigram Language Model**:  
-  $$ P(w_i) = \frac{\text{count}(w_i)}{\sum_{j \in V} \text{count}(w_j)} $$
-
-- **Bigram Language Model**:  
-  $$ P(w_i | w_{i-1}) = \frac{\text{count}(w_{i-1}, w_i)}{\text{count}(w_{i-1})} $$
-
-- **Trigram Language Model**:  
-  $$ P(w_i | w_{i-2}, w_{i-1}) = \frac{\text{count}(w_{i-2}, w_{i-1}, w_i)}{\text{count}(w_{i-2}, w_{i-1})} $$
-
 ### Smoothing
 To handle unseen words or n-grams in the test data, **Laplace Smoothing** is often used:
 
